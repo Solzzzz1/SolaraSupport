@@ -1,3 +1,7 @@
+-- any bans are not my fault! i always said this script was risky
+-- this game is a bit funny at acting with obtainers
+-- how to reduce the chances of ban? play on a alt. use tweens instead of straight teleports, wait minimum 12 seconds before tweening to part!
+
 if game.Players.LocalPlayer.AccountAge > 30 then
     game.Players.LocalPlayer:Kick("Please use in a alt, i don't want this script to be risky in any case and ban your main account.")
     return;
@@ -33,7 +37,7 @@ local function IsAlt()
     elseif F > 30 and E > 15000 then
         IS_ALT = false
         return IS_ALT
-    elseif F < 30 and E < 1500 then
+    elseif F < 30 and E < 15000 then
         IS_ALT = true
         return IS_ALT
     end
@@ -421,10 +425,45 @@ local slider = sector1.element('Slider', 'FPS cap', {default = {min = 60, max = 
     setfpscap(v)
 end)
 
+local actualnames = {
+    "CyberLand",
+    "CorruptedZone",
+    "Castle",
+    "DeadGround",
+    "NightZone"
+}
+
+local NPCDetections = {
+    "Jack O' Lantern",
+    "Reaper",
+    
+}
+
+-- detection system
+
+workspace.ChildAdded:Connect(function(child)
+    local name = child.Name
+    if actualnames[name] then
+        TellUser('Portal', "" .. Names[name] .. " has spawned!")
+        BEEP:Play()
+    end
+end)
+
+-- npc detection
+
+workspace.ChildAdded:Connect(function(child)
+    if NPCDetections[child.Name] then
+        TellUser('NPC', "" .. child.Name .. " has spawned!")
+        BEEP:Play()
+    end
+end)
+
+
 if role == "Free" or role == "Trial Premium" then
     BEEP:Play()
     TellUser('Portal Info', 'Portal tracker / get portal items are premium only (trial and free cannot use).')
 end
+
 print(role)
 if (role ~= "Free" and true or role ~= "Trial Premium" and true) then
     BEEP:Play()
@@ -441,38 +480,6 @@ if (role ~= "Free" and true or role ~= "Trial Premium" and true) then
         ["DeadGround"] = "Dead ground (LXD)",
         ["NightZone"] = "Night zone (Corrupted rifle)";
     }
-
-    local actualnames = {
-        "CyberLand",
-        "CorruptedZone",
-        "Castle",
-        "DeadGround",
-        "NightZone"
-    }
-
-    local NPCDetections = {
-        "Jack O' Lantern",
-        "Reaper",
-        
-    }
-
-    -- detection system
-
-    workspace.ChildAdded:Connect(function(child)
-        local name = child.Name
-        if actualnames[name] then
-            TellUser('Portal', "" .. Names[name] .. " has spawned!")
-            BEEP:Play()
-        end
-    end)
-
-    -- npc detection
-
-    workspace.ChildAdded:Connect(function(child)
-        if NPCDetections[child.Name] then
-            TellUser('NPC', "" .. child.Name .. " has spawned!")
-        end
-    end)
 
 
     local AutoGet = {
@@ -507,7 +514,7 @@ if (role ~= "Free" and true or role ~= "Trial Premium" and true) then
         ["MazeWorld"] = function()
             if workspace:FindFirstChild("MazeWorld") then
                 l__SCRIPTS__l["l__teleport__l"](workspace.Portal.Beam);
-                task.wait(4)
+                task.wait(10)
                 l__SCRIPTS__l["l__tween__l"](game:GetService("Workspace").MazeWorld["ESCAPE FROM THIS HELL"].Head)
             end
         end;
