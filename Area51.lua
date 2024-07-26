@@ -389,8 +389,8 @@ end
 AddCustomButton(sector, 'Auto Get Water Gun', GetWaterGun)
 AddCFrameButton(sector, 'Get HEX spitter gun', game.Workspace["Floor 2"].GetHEXGun.Head.CFrame, 'Teleported to HEX gun!')
 AddCustomButton(sector, 'Auto Get Burning Sword', GBS)
-AddCFrameButton(sector, 'Get Red Missile Launcher', game:GetService("Workspace").Floor 2.GetRedMissile.Head.CFrame, 'Teleported to red missile launcher!')
-ame:GetService("Workspace").CraftingRoom.Part
+AddCFrameButton(sector, 'Get Red Missile Launcher', game:GetService("Workspace")["Floor 2"].GetRedMissile.Head.CFrame, 'Teleported to red missile launcher!')
+--game:GetService("Workspace").CraftingRoom.Part
 
 AddCustomButton(sector1, 'Infinite Cells', function()
     if IsAlt() then
@@ -403,6 +403,8 @@ AddCustomButton(sector1, 'Infinite Cells', function()
         return;
     end
 end)
+
+AddCFrameButton(sector, 'Go to craft room', game:GetService("Workspace").CraftingRoom.Part.CFrame, 'Teleported to crafting room!')
 
 local slider = sector1.element('Slider', 'Walking speed', {default = {min = 16, max = 100, default = 16}}, function(v)
     humanoid.WalkSpeed = v
